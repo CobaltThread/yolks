@@ -17,28 +17,14 @@ RUN         apk update \
             && adduser -D -h /home/container container
 
 RUN         echo -e "getting my.conf" \
-            if [ -f /home/container/.my.cnf ]; then \
-                echo -e "moving current config for install" \
-                mv /home/container/.my.cnf /home/container/custom.my.cnf \
-                runuser -l container -c 'curl https://raw.githubusercontent.com/parkervcp/eggs/master/database/sql/mariadb/install.my.cnf > /home/container/.my.cnf' \
-                else \
-                runuser -l container -c 'curl https://raw.githubusercontent.com/parkervcp/eggs/master/database/sql/mariadb/install.my.cnf > /home/container/.my.cnf' \
-            fi \
-            \
+            runuser -l container -c 'mkdir -p /mnt/temphome' \
+            runuser -l container -c 'curl https://raw.githubusercontent.com/parkervcp/eggs/master/database/sql/mariadb/install.my.cnf > /mnt/temphome/.my.cnf' \
             echo -e "installing mysql database" \
-            runuser -l container -c 'mkdir -p /home/container/run/mysqld' \
-            runuser -l container -c 'mkdir -p /home/container/log/mysql' \
-            runuser -l container -c 'mkdir /home/container/mysql' \
-            \
-            runuser -l container -c 'mysql_install_db --defaults-file=/home/container/.my.cnf' \
-            \
-            if [ -f /mnt/server/custom.my.cnf ]; then \
-                echo -e "moving current config back in place" \
-                mv /home/container/custom.my.cnf /home/container/.my.cnf \
-            else \
-                curl https://raw.githubusercontent.com/parkervcp/eggs/master/database/sql/mariadb/my.cnf > /home/container/.my.cnf \
-            fi \
-            \
+            runuser -l container -c 'mkdir -p /mnt/temphome/run/mysqld' \
+            runuser -l container -c 'mkdir -p /mnt/temphome/log/mysql' \
+            runuser -l container -c 'mkdir /mnt/temphome/mysql' \
+            runuser -l container -c 'mysql_install_db --defaults-file=/mnt/temphome/.my.cnf' \
+            curl https://raw.githubusercontent.com/parkervcp/eggs/master/database/sql/mariadb/my.cnf > /mnt/temphome/.my.cnf \
             echo -e "install complete"
 
 USER        container
