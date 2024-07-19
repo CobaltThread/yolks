@@ -20,6 +20,7 @@ RUN         apk update \
             php83-dom \
             php83-exif \
             php83-fileinfo \
+            php83-fpm \
             php83-gd \
             php83-gettext \
             php83-gmp \
@@ -45,6 +46,7 @@ RUN         apk update \
             php83-xml \
             php83-zip \
             mariadb \
+            nginx \
             && adduser -D -h /home/container container
 
 USER        container
