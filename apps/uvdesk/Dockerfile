@@ -1,4 +1,4 @@
-FROM        --platform=$TARGETOS/$TARGETARCH php:8.4-rc-fpm-alpine3.20
+FROM        --platform=$TARGETOS/$TARGETARCH php:8.3.9-fpm-alpine3.20
 
 LABEL       author="Alexander Featherston" maintainer="afeatherston@proton.me"
 LABEL       org.opencontainers.image.source="https://github.com/cobaltthread/yolks"
