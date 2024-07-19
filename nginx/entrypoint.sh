@@ -28,7 +28,7 @@ echo -e "${BLUE}-------------------------------------------------${NC}"
 echo -e "${YELLOW}Running on Alpine: ${RED} $(cat /etc/alpine-release)${NC}"
 echo -e "${YELLOW}Current timezone: ${RED} ${TZ} ${NC}"
 echo -e "${YELLOW}PHP Version: ${RED} $(php -v) ${NC}"
-echo -e "${YELLOW}Composer Version: ${RED} $(composer --version) ${NC}"
+echo -e "${YELLOW}Nginx Version: ${RED} $(nginx --version) ${NC}"
 echo -e "${BLUE}-------------------------------------------------${NC}"
 
 export PATH=$PATH:/root/.local/bin
