@@ -16,17 +16,6 @@ RUN         apk update \
             runuser \
             && adduser -D -h /home/container container
 
-RUN         echo -e "getting my.conf" \
-            runuser -l container -c 'mkdir -p /mnt/temphome' \
-            runuser -l container -c 'curl https://raw.githubusercontent.com/parkervcp/eggs/master/database/sql/mariadb/install.my.cnf > /mnt/temphome/.my.cnf' \
-            echo -e "installing mysql database" \
-            runuser -l container -c 'mkdir -p /mnt/temphome/run/mysqld' \
-            runuser -l container -c 'mkdir -p /mnt/temphome/log/mysql' \
-            runuser -l container -c 'mkdir /mnt/temphome/mysql' \
-            runuser -l container -c 'mysql_install_db --defaults-file=/mnt/temphome/.my.cnf' \
-            curl https://raw.githubusercontent.com/parkervcp/eggs/master/database/sql/mariadb/my.cnf > /mnt/temphome/.my.cnf \
-            echo -e "install complete"
-
 USER        container
 ENV         USER=container HOME=/home/container
 WORKDIR     /home/container
