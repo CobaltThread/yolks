@@ -11,7 +11,7 @@ on:
 jobs:
   push:
     name: "yolks:apps_${{ matrix.app }}"
-    runs-on: ubuntu-latest
+    runs-on: dedcom-node
     strategy:
       fail-fast: false
       matrix:
@@ -40,5 +40,5 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/pelican-eggs/apps:${{ matrix.app }}
+            ghcr.io/cobaltthread/apps:${{ matrix.app }}
             ghcr.io/parkervcp/apps:${{ matrix.app }}
