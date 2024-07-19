@@ -23,12 +23,14 @@ export INTERNAL_IP
 
 # system informations
 echo -e "${BLUE}-------------------------------------------------${NC}"
-echo -e "${RED}UVDesk Image${NC}"
+echo -e "${RED}Nginx + PHP8.3 + MariaDB Image${NC}"
 echo -e "${BLUE}-------------------------------------------------${NC}"
 echo -e "${YELLOW}Running on Alpine: ${RED} $(cat /etc/alpine-release)${NC}"
 echo -e "${YELLOW}Current timezone: ${RED} ${TZ} ${NC}"
-echo -e "${YELLOW}PHP Version: ${RED} $(php -v) ${NC}"
-echo -e "${YELLOW}Nginx Version: ${RED} $(nginx --version) ${NC}"
+PHP_VERSION=$(php -v | grep -oE 'PHP\s[.0-9]+' | grep -oE '[.0-9]+' | grep '^8.3')
+echo -e "${YELLOW}PHP Version: ${RED} $(PHP_VERSION) ${NC}"
+NGINX_VERSION=$(nginx -v | awk -F "[/ ]+" '/nginx/{print $NF}' | grep '^1.26')
+echo -e "${YELLOW}Nginx Version: ${RED} $(nginx -v) ${NC}"
 echo -e "${BLUE}-------------------------------------------------${NC}"
 
 export PATH=$PATH:/root/.local/bin
